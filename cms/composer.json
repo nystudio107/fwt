@@ -1,0 +1,50 @@
+{
+  "require": {
+    "craftcms/cms": "^3.5.8",
+    "vlucas/phpdotenv": "^3.4.0",
+    "yiisoft/yii2-redis": "^2.0.6",
+    "nystudio107/craft-imageoptimize": "^1.0.0",
+    "nystudio107/craft-fastcgicachebust": "^1.0.0",
+    "nystudio107/craft-minify": "^1.2.5",
+    "nystudio107/craft-typogrify": "^1.1.4",
+    "nystudio107/craft-retour": "^3.0.0",
+    "nystudio107/craft-seomatic": "^3.2.0",
+    "nystudio107/craft-webperf": "^1.0.0",
+    "nystudio107/craft-twigpack": "^1.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "modules\\sitemodule\\": "modules/sitemodule/src/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.0"
+    }
+  },
+  "scripts": {
+    "craft-update": [
+      "@pre-craft-update",
+      "@post-craft-update"
+    ],
+    "pre-craft-update": [
+    ],
+    "post-craft-update": [
+      "@php craft install/check && php craft clear-caches/all || return 0",
+      "@php craft install/check && php craft migrate/all || return 0",
+      "@php craft install/check && php craft project-config/apply || return 0"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@php craft setup/welcome"
+    ],
+    "pre-update-cmd": "@pre-craft-update",
+    "pre-install-cmd": "@pre-craft-update",
+    "post-update-cmd": "@post-craft-update",
+    "post-install-cmd": "@post-craft-update"
+  }
+}
