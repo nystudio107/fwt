@@ -23,9 +23,9 @@ module.exports = {
         templates: "../cms/templates/"
     },
     urls: {
-        live: "https://example.com/",
-        local: "http://example.test/",
-        critical: "http://example.test/",
+        live: "https://webstertrails.org/",
+        local: "http://localhost:8000/",
+        critical: "https://quaint-caracal-staging.cl-us-east-1.servd.dev/",
         publicPath: () => process.env.PUBLIC_PATH || "/dist/",
     },
     vars: {
