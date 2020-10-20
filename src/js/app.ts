@@ -3,6 +3,7 @@ import '../css/app.pcss';
 
 import board from './charcuterie.js';
 console.table(board);
+console.log(board[0].rating * 10);
 
 // App main
 const main = async () => {

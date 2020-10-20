@@ -1,6 +1,6 @@
-const board = [];
+const board:Charcuterie = [];
 
-const meats = [
+const meats: Charcuterie = [
     {
         name: 'Salami',
         calories: 100,
@@ -12,7 +12,7 @@ const meats = [
     },
 ];
 
-const veggies = [
+const veggies:Veggie[] = [
     {
         name: 'Broccoli',
     },
@@ -21,7 +21,7 @@ const veggies = [
     },
 ];
 
-function addToCharcuterieBoard(item) {
+function addToCharcuterieBoard(item: Meat) {
     board.push(item);
 }
 
