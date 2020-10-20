@@ -1,6 +1,6 @@
 const board:Charcuterie = [];
 
-const meats: Charcuterie = [
+const meats: Meat[] = [
     {
         name: 'Salami',
         calories: 100,

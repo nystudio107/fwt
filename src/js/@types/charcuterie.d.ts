@@ -9,4 +9,3 @@ interface Veggie {
 }
 
 type Charcuterie = Meat[];
-
