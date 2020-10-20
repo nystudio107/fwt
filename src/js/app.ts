@@ -1,6 +1,9 @@
 // Import our CSS
 import '../css/app.pcss';
 
+import board from './charcuterie.js';
+console.table(board);
+
 // App main
 const main = async () => {
     // Async load the Vue 3 APIs we need from the Vue ESM
