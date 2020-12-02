@@ -9,17 +9,15 @@ services:
     env_file: &env
       - ./cms/.env
     init: true
-    links:
-      - php
     ports:
       - "8000:80"
     volumes:
       - cpresources:/var/www/project/cms/web/cpresources
       - ./cms/web:/var/www/project/cms/web:cached
-  # php - personal home page
+  # php - run php-fpm
   php:
     build: &php-build
-      context: ./docker-config/php-dev-craft
+      context: ./docker-config/php-prod-craft
       dockerfile: ./Dockerfile
     depends_on:
       - "mariadb"
@@ -29,15 +27,27 @@ services:
     expose:
       - "9000"
     init: true
-    links: &php-links
-      - mariadb
-      - redis
     volumes: &php-volumes
       - cpresources:/var/www/project/cms/web/cpresources
       - storage:/var/www/project/cms/storage
       - ./cms:/var/www/project/cms:cached
       - ./cms/vendor:/var/www/project/cms/vendor:delegated
       - ./cms/storage/logs:/var/www/project/cms/storage/logs:delegated
+  # php - run php-fpm with xdebug
+  php_xdebug:
+    build:
+      context: ./docker-config/php-dev-craft
+      dockerfile: ./Dockerfile
+    depends_on:
+      - "php"
+    env_file:
+      *env
+    expose:
+      - "9000"
+    init: true
+    user: www-data
+    volumes:
+      *php-volumes
   # queue - runs queue jobs via php craft queue/listen
   queue:
     build:
@@ -50,8 +60,6 @@ services:
     expose:
       - "9001"
     init: true
-    links:
-      *php-links
     user: www-data
     volumes:
       *php-volumes
@@ -95,7 +103,7 @@ services:
       - ./tsconfig.json:/var/www/project/tsconfig.json:cached
       - ./buildchain:/var/www/project/buildchain:cached
       - ./buildchain/node_modules:/var/www/project/buildchain/node_modules:delegated
-      - ./cms/web/dist:/var/www/project/cms/web/dist:delegated
+      - ./cms/web:/var/www/project/cms/web:delegated
       - ./src:/var/www/project/src:cached
       - ./cms/templates:/var/www/project/cms/templates:cached
 

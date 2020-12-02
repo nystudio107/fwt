@@ -1,9 +1,73 @@
 # nystudio107/craft Change Log
 
+## 2.4.8 - 2020.11.30
+### Added
+* Added `nodemon` so `webpack-dev-server` will automatically restart if we change any of the webpack configs
+
+### Changed
+* Use `webpack-dev-server` version `^4.0.0-beta.0` for additional speed & better webpack 5 support
+
+## 2.4.7 - 2020.11.26
+### Changed
+* Remove `postcss-preset-env`, add `autoprefixer` & `postcss-nested`
+
+## 2.4.6 - 2020.11.25
+### Changed
+* Change `mysql-client` to `mariadb-client`
+
+## 2.4.5 - 2020.11.25
+### Added
+* Add `mysql-client` in the `php-dev-craft` & `php-prod-craft` MariaDB containers so we get `mysqldump`
+* Added image optimization tools to the `php-dev-craft` & `php-prod-craft` MariaDB containers
+
+## 2.4.4 - 2020.11.21
+### Changed
+* Ignore `/admin` routes in the Service Worker
+
+## 2.4.3 - 2020.11.17
+### Fixed
+* Removed `xdebug.remote_connect_back` from the `php-dev-base` container's `xdebug.ini` file to allow xdebug to connect properly
+
+## 2.4.2 - 2020.11.11
+### Fixed
+* Removed unused `path` attribute passed to `MiniCssExtractPlugin` in the `production.config.js`
+
+## 2.4.1 - 2020.11.11
+### Changed
+* Sync Craft version
+
+## 2.4.0 - 2020.11.10
+### Added
+* Updated buildchain to a modular webpack config system, using webpack 5 & PostCSS 8
+* Added `yiisoft/yii2-shell` to `require-dev`
+* Add `--no-dev --no-progress` to the composer install command
+
+### Changed
+* Ignore Nginx requests for `favicon.ico`
+* Removed deprecated `links` from `docker-compose.yaml`
+* Use Composer 2.x
+
+## 2.3.14 - 2020.10.25
+### Added
+* Added `/cms/web/dist/*` to root `.gitignore`
+* Use a separate `php_xdebug` container only when the `XDEBUG_SESSION` cookie is set, so regular requests are more performant
+
+## 2.3.13 - 2020.09.25
+### Added
+* Add `run_queue.sh` keep alive script
+
+## 2.3.12 - 2020.09.25
+### Added
+* Added a `db-seed` directory, and moved the `seed_db.sql` there
+* Added `--set-gtid-purged=OFF` to the `common_mysql.sh` to avoid permissions issues with some database dumps
+* Explicitly set the `user` that the PHP & queue containers run as to `www-data`
+### Changed
+* Removed unneeded `composer dump-autoload` from the project `composer.json`
+
 ## 2.3.11 - 2020.09.15
 ### Changed
 * Explicitly set `id` from APP_ID and use `keyPrefix` for cache component
-* 
+* Add docker_prod_build script
 
 ## 2.3.10 - 2020.09.10
 ### Changed
